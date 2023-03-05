@@ -8,18 +8,18 @@ Test account and password: ply@test.com / Ply@98765
   <img src="https://user-images.githubusercontent.com/60932746/222939027-65ede13a-42de-4a13-b5ee-8b7e0456e04e.gif" style="width: 150px; height:300px"/>
 <div>
 
-# Table of Contents
-- [Main Feature](#Main Feature)
-- [Project Technique](#Project Technique)
-- [Architecture](#sArchitecture)
+## Table of Contents
+- [Main Feature](#section-1)
+- [Project Technique](#section-2)
+- [Architecture](#section-3)
 
-# Main Feature {#Main Feature}
+## Main Feature {#section-1}
 - Merchant authentication with Json Web Token.
 - Cunsumer Sign in with LINE the OAuth 2.0 and OpenID® Connect protocols.
 - Once the Merchant sets the appointment schedule, consumers can immediately view the available time slots through the LINE official account.
 - Consumers can use TapPay to make payments for their orders on LINE.
 
-# Project Technique {#Project Technique}
+## Project Technique {#section-2}
 <h3>Frontend Technique</h3>
 <ul>
 <li>JavaScript
@@ -38,6 +38,6 @@ Test account and password: ply@test.com / Ply@98765
 <li>FullCalendar
 </ul>
 
-# Architecture {#Architecture}
+## Architecture {#section-3}
 ![schedulebooking_architecture](https://user-images.githubusercontent.com/60932746/222962853-e934878e-069e-4791-9e1f-8f1cc05cd452.png)
 
