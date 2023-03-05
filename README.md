@@ -11,6 +11,7 @@ Test account and password: ply@test.com / Ply@98765
 # Table of Contents
 - [Main Feature](https://github.com/pysky9/schedulebooking/new/master?readme=1#%E4%B8%BB%E8%A6%81%E7%89%B9%E8%89%B2)
 - [Project Technique](https://github.com/pysky9/schedulebooking/new/master?readme=1#project-technique)
+- [Architecture](https://github.com/pysky9/schedulebooking/edit/master/README.md#architecture)
 
 # Main Feature
 - Merchant authentication with Json Web Token.
@@ -36,3 +37,7 @@ Test account and password: ply@test.com / Ply@98765
 <ul>
 <li>FullCalendar
 </ul>
+
+# Architecture
+![schedulebooking_architecture](https://user-images.githubusercontent.com/60932746/222962853-e934878e-069e-4791-9e1f-8f1cc05cd452.png)
+
