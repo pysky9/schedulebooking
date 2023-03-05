@@ -9,17 +9,17 @@ Test account and password: ply@test.com / Ply@98765
 <div>
 
 ## Table of Contents
-- [Main Feature](#section-1)
-- [Project Technique](#section-2)
-- [Architecture](#section-3)
+- [Main Feature](https://github.com/pysky9/schedulebooking/edit/master/README.md#main-feature)
+- [Project Technique](https://github.com/pysky9/schedulebooking/edit/master/README.md#project-technique)
+- [Architecture](https://github.com/pysky9/schedulebooking/edit/master/README.md#architecture)
 
-## Main Feature {#section-1}
+## Main Feature
 - Merchant authentication with Json Web Token.
 - Cunsumer Sign in with LINE the OAuth 2.0 and OpenID® Connect protocols.
 - Once the Merchant sets the appointment schedule, consumers can immediately view the available time slots through the LINE official account.
 - Consumers can use TapPay to make payments for their orders on LINE.
 
-## Project Technique {#section-2}
+## Project Technique
 <h3>Frontend Technique</h3>
 <ul>
 <li>JavaScript
@@ -38,6 +38,6 @@ Test account and password: ply@test.com / Ply@98765
 <li>FullCalendar
 </ul>
 
-## Architecture {#section-3}
+## Architecture
 ![schedulebooking_architecture](https://user-images.githubusercontent.com/60932746/222962853-e934878e-069e-4791-9e1f-8f1cc05cd452.png)
 
