@@ -1,32 +1,32 @@
 # 吉時約 ScheduleBooking
 
-"吉時約" is an online appointment platform that allows businesses to set available dates and time slots for appointments on the website, and consumers can make appointments through the business's official LINE account.
+"吉時約" is an professional service booking platform that allows merchants to set available dates and time slots for appointments on the website, and consumers can make appointments through the business's official LINE account.
 
-WebSite: https://www.schedule-booking.com/
+WebSite: https://www.schedule-booking.com/ LINE官方帳號預訂: https://lin.ee/MZCAf7v
 
-Test account and password: ply@test.com / Ply@98765
-<div style="display:flex; justify-content: center">
-  <img src="https://user-images.githubusercontent.com/60932746/222939021-5d5ea6e1-f647-49e4-b3a5-20550dfa3bfc.PNG" style="width: 650px"/>
-  <img src="https://user-images.githubusercontent.com/60932746/222939027-65ede13a-42de-4a13-b5ee-8b7e0456e04e.gif" style="width: 150px; height:300px"/>
-<div>
+WebSite test account and password: ply@test.com / Ply@98765
+## Demo
+<h3>Merchants-Professional service provider</h3>
+<img src="https://user-images.githubusercontent.com/60932746/223953100-319dfc83-e34a-4c58-a208-fb4b610dcc07.gif" style="width: 650px"/>
+
+<h3>Customers</h3>
+<img src="https://user-images.githubusercontent.com/60932746/222939027-65ede13a-42de-4a13-b5ee-8b7e0456e04e.gif" style="width: 150px; height:300px"/>
 
 ## Table of Contents
 - [Main Feature](https://github.com/pysky9/schedulebooking/edit/master/README.md#main-feature)
 - [Project Technique](https://github.com/pysky9/schedulebooking/edit/master/README.md#project-technique)
 - [Architecture](https://github.com/pysky9/schedulebooking/edit/master/README.md#architecture)
+- [Contact](https://github.com/pysky9/schedulebooking/edit/master/README.md#contact)
 
 ## Main Feature
 - Merchant authentication with Json Web Token.
 - Cunsumer Sign in with LINE the OAuth 2.0 and OpenID® Connect protocols.
 - Once the Merchant sets the appointment schedule, consumers can immediately view the available time slots through the LINE official account.
-- Consumers can use TapPay to make payments for their orders on LINE.
+- Display only the available time slots for reservations on the client side starting from the current time onwards.
+- Consumers can use TapPay to make payments for their orders.
+- After the consumer completes the payment, the reserved schedule will automatically appear on the merchant's backend system calendar.
 
 ## Project Technique
-<h3>Frontend Technique</h3>
-<ul>
-<li>JavaScript
-<li>Bootstrap 5
-</ul>
 <h3>Backend Technique</h3>
 <ul>
 <li>Python/Django
@@ -34,12 +34,29 @@ Test account and password: ply@test.com / Ply@98765
 <li>AWS EC2, S3, RDS
 <li>JSON Web Token
 <li>Nginx
+<li>SSL
+</ul>
+<h3>Frontend Technique</h3>
+<ul>
+<li>JavaScript
+<li>Bootstrap 5
+<li>HTML
+<li>CSS
 </ul>
 <h3>Third Party Library</h3>
 <ul>
 <li>FullCalendar
+<li>TapPay
 </ul>
 
 ## Architecture
-![schedulebooking_architecture](https://user-images.githubusercontent.com/60932746/222962853-e934878e-069e-4791-9e1f-8f1cc05cd452.png)
+<h3>Web Architecture</h3>
+<img src="https://user-images.githubusercontent.com/60932746/222962853-e934878e-069e-4791-9e1f-8f1cc05cd452.png">
+<h3>Database Architecture</h3>
+<img src="https://user-images.githubusercontent.com/60932746/223929245-a8fc9b1f-4a53-4b93-8baa-b041b9713051.png">
+
+## Contact
+李榮輝 Jung-Hui Li
+
+Email: derek.j.h.li@gmail.com
 
