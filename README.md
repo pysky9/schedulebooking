@@ -1,22 +1,25 @@
 # 吉時約 ScheduleBooking
 
-"吉時約" is an professional service booking platform that allows merchants to set available dates and time slots for appointments on the website, and consumers can make appointments through the business's official LINE account.
+"吉時約" is an professional service booking platform that allows merchants to set available dates and time slots for appointments on the website, and consumers can make appointments through the business's official LINE account.<br>
 
-WebSite: https://www.schedule-booking.com/ LINE官方帳號預訂: https://lin.ee/MZCAf7v
-
+WebSite: https://www.schedule-booking.com/ LINE官方帳號預訂: https://lin.ee/MZCAf7v<br>
 WebSite test account and password: ply@test.com / Ply@98765
 ## Demo
-<h3>Merchants-Professional service provider</h3>
+<h3>Merchant Backend Management System</h3>
+- Setting reservation dates and time slots<br>
+- Order management<br>
+- Customer information will be displayed on the reservation calendar<br>
+- Linkage with LINE Official Account<br>
 <img src="https://user-images.githubusercontent.com/60932746/223953100-319dfc83-e34a-4c58-a208-fb4b610dcc07.gif" style="width: 650px"/>
 
-<h3>Customers</h3>
+<h3>Customer Booking System</h3>
 <img src="https://user-images.githubusercontent.com/60932746/222939027-65ede13a-42de-4a13-b5ee-8b7e0456e04e.gif" style="width: 150px; height:300px"/>
 
 ## Table of Contents
-- [Main Feature](https://github.com/pysky9/schedulebooking/edit/master/README.md#main-feature)
-- [Project Technique](https://github.com/pysky9/schedulebooking/edit/master/README.md#project-technique)
-- [Architecture](https://github.com/pysky9/schedulebooking/edit/master/README.md#architecture)
-- [Contact](https://github.com/pysky9/schedulebooking/edit/master/README.md#contact)
+- [Main Feature](#main-feature)
+- [Project Technique](#project-technique)
+- [Architecture](#architecture)
+- [Contact](#contact)
 
 ## Main Feature
 - Merchant authentication with Json Web Token.
