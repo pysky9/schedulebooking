@@ -5,20 +5,22 @@
 WebSite: https://www.schedule-booking.com/ LINE官方帳號預訂: https://lin.ee/MZCAf7v<br>
 WebSite test account and password: ply@test.com / Ply@98765
 ## Demo
-<h3>Merchant Backend Management System</h3>
+### Merchant Backend Management System
 - Setting reservation dates and time slots<br>
 - Order management<br>
 - Customer information will be displayed on the reservation calendar<br>
 - Linkage with LINE Official Account<br>
 <img src="https://user-images.githubusercontent.com/60932746/223953100-319dfc83-e34a-4c58-a208-fb4b610dcc07.gif" style="width: 650px"/>
 
-<h3>Customer Booking System</h3>
+### Customer Booking System
+- Consumers can use LINE to make reservations, payments, and check reservation records all in one platform.
 <img src="https://user-images.githubusercontent.com/60932746/222939027-65ede13a-42de-4a13-b5ee-8b7e0456e04e.gif" style="width: 150px; height:300px"/>
 
 ## Table of Contents
 - [Main Feature](#main-feature)
 - [Project Technique](#project-technique)
 - [Architecture](#architecture)
+- [Database Schema](#database-schema)
 - [Contact](#contact)
 
 ## Main Feature
@@ -53,9 +55,13 @@ WebSite test account and password: ply@test.com / Ply@98765
 </ul>
 
 ## Architecture
-<h3>Web Architecture</h3>
+- Using Django to develop the website
+- Using Bootstrap to build web layouts
+- Integrating the LINE LIFF browser on the consumer side, allowing consumers to complete web operations in LINE
+- Integrating LINE Login to obtain consumers' personal public information
 <img src="https://user-images.githubusercontent.com/60932746/222962853-e934878e-069e-4791-9e1f-8f1cc05cd452.png">
-<h3>Database Architecture</h3>
+
+## Database Schema
 <img src="https://user-images.githubusercontent.com/60932746/223929245-a8fc9b1f-4a53-4b93-8baa-b041b9713051.png">
 
 ## Contact
