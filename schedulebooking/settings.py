@@ -88,13 +88,8 @@ WSGI_APPLICATION = 'schedulebooking.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'schedulebooking', # DB Name
-        'USER': 'admin',
-        'PASSWORD': os.getenv('mysqlpw'),
-        'HOST': 'schedulebooking.cmyeqhfauonl.us-west-2.rds.amazonaws.com',
-        'PORT': '3306',
-
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -160,11 +155,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 
 # # CSRF Token
-CSRF_COOKIE_DOMAIN = '.schedule-booking.com'
+# 在開發環境中暫時關閉 CSRF 保護，或添加本地開發域名
+CSRF_COOKIE_DOMAIN = None
 CSRF_TRUSTED_ORIGINS = [
     'https://*.schedule-booking.com',
     'https://access.line.me',
-    'https://api.line.me'
+    'https://api.line.me',
+    'http://127.0.0.1:8000',
+    'http://localhost:8000'
 ]
 
 # CORS

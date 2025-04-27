@@ -6,6 +6,17 @@
 __pycache__
 db.sqlite3
 media
+
+# Django 靜態文件收集目錄 #
+/static/
+staticfiles/
+
+# Django 本地設置 #
+local_settings.py
+
+# Django 遷移文件 (可選，視專案需求而定) #
+*/migrations/*.py
+!*/migrations/__init__.py
 # Backup files # 
 *.bak 
 
