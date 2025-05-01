@@ -1,6 +1,8 @@
 <template>
-  <div class="setting-view">
-    <h1>商家設定</h1>
+  <div>
+    <sitemap-nav-bar @logout="handleLogout" />
+    
+    <div class="container mt-3">
     
     <div class="setting-tabs mb-4">
       <ul class="nav nav-tabs">
@@ -338,19 +340,32 @@
           </button>
         </div>
       </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import axios from 'axios';
+import SitemapNavBar from '@/components/SitemapNavBar.vue';
 
 export default {
   name: 'SettingView',
+  components: {
+    SitemapNavBar
+  },
   setup() {
+    const router = useRouter();
     const activeTab = ref('profile');
     const saving = ref(false);
+    
+    // 處理登出
+    const handleLogout = () => {
+      console.log('用戶登出');
+      router.push('/login');
+    };
     
     // 基本資料
     const profile = ref({
@@ -631,7 +646,8 @@ export default {
       addSpecialDateTimeSlot,
       removeSpecialDateTimeSlot,
       saveTimeSettings,
-      saveLineSettings
+      saveLineSettings,
+      handleLogout
     };
   }
 }

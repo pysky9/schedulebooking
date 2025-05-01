@@ -15,6 +15,8 @@
 <script>
 import { ref, onMounted } from 'vue';
 import moment from 'moment';
+// 引入 API 服務
+import { getAppointmentTimes } from '../api/calendar';
 
 export default {
   name: 'BookedCalendar',
@@ -41,9 +43,6 @@ export default {
       });
       calendar.render();
     };
-    
-    // 引入 API 服務
-    import { getAppointmentTimes } from '../api/calendar';
     
     // 獲取預約數據
     const fetchAppointments = async () => {

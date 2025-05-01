@@ -1,15 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import CalendarView from '../views/CalendarView.vue'
+import BookedCalendarView from '../views/bookedcalendar.vue'
 
 const routes = [
   {
     path: '/',
-    redirect: '/calendar'
+    name: 'home',
+    component: () => import('../views/index.vue')
   },
   {
     path: '/calendar',
     name: 'calendar',
-    component: CalendarView
+    component: BookedCalendarView
   },
   {
     path: '/orders',

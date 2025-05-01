@@ -1,124 +1,127 @@
 <template>
-  <div class="order-view">
-    <h1>訂單管理</h1>
+  <div>
+    <sitemap-nav-bar @logout="handleLogout" />
     
-    <div class="order-tabs mb-4">
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <button class="nav-link" :class="{ active: activeTab === 'current' }" @click="activeTab = 'current'">
-            當前訂單
-          </button>
-        </li>
-        <li class="nav-item">
-          <button class="nav-link" :class="{ active: activeTab === 'history' }" @click="activeTab = 'history'">
-            歷史訂單
-          </button>
-        </li>
-      </ul>
-    </div>
-    
-    <div class="tab-content">
-      <!-- 當前訂單 -->
-      <div v-if="activeTab === 'current'" class="current-orders">
-        <div v-if="loading" class="text-center my-5">
-          <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        </div>
-        
-        <div v-else-if="currentOrders.length === 0" class="alert alert-info">
-          目前沒有進行中的訂單
-        </div>
-        
-        <div v-else class="order-list">
-          <div v-for="order in currentOrders" :key="order.id" class="order-card">
-            <div class="card mb-3">
-              <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">訂單 #{{ order.id }}</h5>
-                <span class="badge" :class="getStatusBadgeClass(order.status)">{{ getStatusText(order.status) }}</span>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-6">
-                    <p><strong>客戶名稱:</strong> {{ order.customerName }}</p>
-                    <p><strong>預約日期:</strong> {{ order.appointmentDate }}</p>
-                    <p><strong>預約時間:</strong> {{ order.appointmentTime }}</p>
-                  </div>
-                  <div class="col-md-6">
-                    <p><strong>服務項目:</strong> {{ order.serviceName }}</p>
-                    <p><strong>服務時長:</strong> {{ order.serviceTime }}</p>
-                    <p><strong>訂單金額:</strong> NT$ {{ order.amount }}</p>
-                  </div>
-                </div>
-                <div class="mt-3 d-flex justify-content-end">
-                  <button class="btn btn-outline-primary me-2" @click="viewOrderDetails(order.id)">查看詳情</button>
-                  <button v-if="order.status === 'pending'" class="btn btn-success me-2" @click="confirmOrder(order.id)">確認訂單</button>
-                  <button v-if="['pending', 'confirmed'].includes(order.status)" class="btn btn-danger" @click="cancelOrder(order.id)">取消訂單</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="container mt-3">
+      
+      <div class="order-tabs mb-4">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <button class="nav-link" :class="{ active: activeTab === 'current' }" @click="activeTab = 'current'">
+              當前訂單
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" :class="{ active: activeTab === 'history' }" @click="activeTab = 'history'">
+              歷史訂單
+            </button>
+          </li>
+        </ul>
       </div>
       
-      <!-- 歷史訂單 -->
-      <div v-if="activeTab === 'history'" class="history-orders">
-        <div class="mb-3">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="搜尋訂單..." v-model="searchQuery">
-                <button class="btn btn-outline-secondary" type="button" @click="searchOrders">搜尋</button>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <select class="form-select" v-model="filterStatus">
-                <option value="">所有狀態</option>
-                <option value="completed">已完成</option>
-                <option value="cancelled">已取消</option>
-              </select>
-            </div>
-            <div class="col-md-4">
-              <div class="input-group">
-                <input type="date" class="form-control" v-model="filterDate">
-                <button class="btn btn-outline-secondary" type="button" @click="resetFilters">重置</button>
-              </div>
+      <div class="tab-content">
+        <!-- 當前訂單 -->
+        <div v-if="activeTab === 'current'" class="current-orders">
+          <div v-if="loading" class="text-center my-5">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
             </div>
           </div>
-        </div>
-        
-        <div v-if="loading" class="text-center my-5">
-          <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
+          
+          <div v-else-if="currentOrders.length === 0" class="alert alert-info">
+            目前沒有進行中的訂單
           </div>
-        </div>
-        
-        <div v-else-if="historyOrders.length === 0" class="alert alert-info">
-          沒有符合條件的歷史訂單
-        </div>
-        
-        <div v-else class="order-list">
-          <div v-for="order in historyOrders" :key="order.id" class="order-card">
-            <div class="card mb-3">
-              <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">訂單 #{{ order.id }}</h5>
-                <span class="badge" :class="getStatusBadgeClass(order.status)">{{ getStatusText(order.status) }}</span>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-6">
-                    <p><strong>客戶名稱:</strong> {{ order.customerName }}</p>
-                    <p><strong>預約日期:</strong> {{ order.appointmentDate }}</p>
-                    <p><strong>完成日期:</strong> {{ order.completedDate || '---' }}</p>
+          
+          <div v-else class="order-list">
+            <div v-for="order in currentOrders" :key="order.id" class="order-card">
+              <div class="card mb-3">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                  <h5 class="mb-0">訂單 #{{ order.id }}</h5>
+                  <span class="badge" :class="getStatusBadgeClass(order.status)">{{ getStatusText(order.status) }}</span>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p><strong>客戶名稱:</strong> {{ order.customerName }}</p>
+                      <p><strong>預約日期:</strong> {{ order.appointmentDate }}</p>
+                      <p><strong>預約時間:</strong> {{ order.appointmentTime }}</p>
+                    </div>
+                    <div class="col-md-6">
+                      <p><strong>服務項目:</strong> {{ order.serviceName }}</p>
+                      <p><strong>服務時長:</strong> {{ order.serviceTime }}</p>
+                      <p><strong>訂單金額:</strong> NT$ {{ order.amount }}</p>
+                    </div>
                   </div>
-                  <div class="col-md-6">
-                    <p><strong>服務項目:</strong> {{ order.serviceName }}</p>
-                    <p><strong>訂單金額:</strong> NT$ {{ order.amount }}</p>
-                    <p><strong>付款方式:</strong> {{ order.paymentMethod }}</p>
+                  <div class="mt-3 d-flex justify-content-end">
+                    <button class="btn btn-outline-primary me-2" @click="viewOrderDetails(order.id)">查看詳情</button>
+                    <button v-if="order.status === 'pending'" class="btn btn-success me-2" @click="confirmOrder(order.id)">確認訂單</button>
+                    <button v-if="['pending', 'confirmed'].includes(order.status)" class="btn btn-danger" @click="cancelOrder(order.id)">取消訂單</button>
                   </div>
                 </div>
-                <div class="mt-3 d-flex justify-content-end">
-                  <button class="btn btn-outline-primary" @click="viewOrderDetails(order.id)">查看詳情</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 歷史訂單 -->
+        <div v-if="activeTab === 'history'" class="history-orders">
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="搜尋訂單..." v-model="searchQuery">
+                  <button class="btn btn-outline-secondary" type="button" @click="searchOrders">搜尋</button>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <select class="form-select" v-model="filterStatus">
+                  <option value="">所有狀態</option>
+                  <option value="completed">已完成</option>
+                  <option value="cancelled">已取消</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <div class="input-group">
+                  <input type="date" class="form-control" v-model="filterDate">
+                  <button class="btn btn-outline-secondary" type="button" @click="resetFilters">重置</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div v-if="loading" class="text-center my-5">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          
+          <div v-else-if="historyOrders.length === 0" class="alert alert-info">
+            沒有符合條件的歷史訂單
+          </div>
+          
+          <div v-else class="order-list">
+            <div v-for="order in historyOrders" :key="order.id" class="order-card">
+              <div class="card mb-3">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                  <h5 class="mb-0">訂單 #{{ order.id }}</h5>
+                  <span class="badge" :class="getStatusBadgeClass(order.status)">{{ getStatusText(order.status) }}</span>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p><strong>客戶名稱:</strong> {{ order.customerName }}</p>
+                      <p><strong>預約日期:</strong> {{ order.appointmentDate }}</p>
+                      <p><strong>完成日期:</strong> {{ order.completedDate || '---' }}</p>
+                    </div>
+                    <div class="col-md-6">
+                      <p><strong>服務項目:</strong> {{ order.serviceName }}</p>
+                      <p><strong>訂單金額:</strong> NT$ {{ order.amount }}</p>
+                      <p><strong>付款方式:</strong> {{ order.paymentMethod }}</p>
+                    </div>
+                  </div>
+                  <div class="mt-3 d-flex justify-content-end">
+                    <button class="btn btn-outline-primary" @click="viewOrderDetails(order.id)">查看詳情</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -131,11 +134,17 @@
 
 <script>
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import axios from 'axios';
+import SitemapNavBar from '@/components/SitemapNavBar.vue';
 
 export default {
   name: 'OrderView',
+  components: {
+    SitemapNavBar
+  },
   setup() {
+    const router = useRouter();
     const activeTab = ref('current');
     const loading = ref(true);
     const currentOrders = ref([]);
@@ -143,6 +152,12 @@ export default {
     const searchQuery = ref('');
     const filterStatus = ref('');
     const filterDate = ref('');
+    
+    // 處理登出
+    const handleLogout = () => {
+      console.log('用戶登出');
+      router.push('/login');
+    };
     
     // 獲取當前訂單
     const fetchCurrentOrders = async () => {
@@ -268,7 +283,8 @@ export default {
       searchOrders,
       resetFilters,
       getStatusText,
-      getStatusBadgeClass
+      getStatusBadgeClass,
+      handleLogout
     };
   }
 }
