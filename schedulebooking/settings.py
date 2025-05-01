@@ -42,12 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'storages',
-    'schedule',
     'members',
-    'scheduler',
+    'scheduler',  # 之前的 'calendar'
     'cart',
-    'order',
     'line_service',
+    'order',
 ]
 
 MIDDLEWARE = [
