@@ -16,15 +16,28 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
-# from membersApp.views import homepage, login_signup
+from django.views.decorators.csrf import csrf_exempt
+from django.middleware.csrf import get_token
+from django.http import JsonResponse
+# from members.views import homepage, login_signup
 from schedulebooking.views import homepage
+
+# CSRF Token 視圖函數
+def get_csrf_token(request):
+    token = get_token(request)
+    return JsonResponse({'csrfToken': token})
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homepage),
-    path('members/', include('membersApp.urls')), # 專案urls.py統一管理
-    path('calendar/', include('calendarApp.urls')),
-    path('cart/', include('cartApp.urls')),
-    path('order/', include('orderApp.urls')),
-    path('line/', include('lineApp.urls')),
+    # 原始應用路由
+    path('scheduler/', include('scheduler.urls')),
+    path('members/', include('members.urls')),
+    path('cart/', include('cart.urls')),
+    path('order/', include('order.urls')),
+    path('line/', include('line_service.urls')),
+    
+    # API 路由
+    path('api/', include('scheduler.api_urls')),
+    path('api/csrf-token/', get_csrf_token),
 ]

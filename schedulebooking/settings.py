@@ -43,11 +43,11 @@ INSTALLED_APPS = [
     'corsheaders',
     'storages',
     'schedule',
-    'membersApp',
-    'calendarApp',
-    'cartApp',
-    'orderApp',
-    'lineApp',
+    'members',
+    'scheduler',
+    'cart',
+    'order',
+    'line_service',
 ]
 
 MIDDLEWARE = [

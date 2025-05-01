@@ -1,0 +1,48 @@
+/* 全局樣式 */
+:root {
+  --primary-color: #4a6bff;
+  --secondary-color: #f8f9fa;
+  --text-color: #333;
+  --border-color: #dee2e6;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Microsoft JhengHei', Arial, sans-serif;
+  color: var(--text-color);
+  background-color: #fff;
+}
+
+.container {
+  padding: 20px;
+}
+
+/* 導航欄樣式 */
+.navbar {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.navbar-brand, .nav-link {
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  color: var(--primary-color) !important;
+}
+
+/* 按鈕樣式 */
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: #3a5bef;
+  border-color: #3a5bef;
+}
+
+/* 載入指示器樣式 */
+.spinner-border {
+  color: var(--primary-color);
+}
