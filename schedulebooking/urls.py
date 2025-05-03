@@ -30,14 +30,15 @@ def get_csrf_token(request):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homepage),
-    # 原始應用路由
-    path('scheduler/', include('scheduler.urls')),
-    path('members/', include('members.urls')),
-    path('cart/', include('cart.urls')),
-    path('order/', include('order.urls')),
-    path('line/', include('line_service.urls')),
+    # # 原始應用路由
+    # path('scheduler/', include('scheduler.urls')),
+    # path('members/', include('members.urls')),
+    # path('cart/', include('cart.urls')),
+    # path('order/', include('order.urls')),
+    # path('line/', include('line_service.urls')),
     
     # API 路由
-    path('api/', include('scheduler.api_urls')),
-    path('api/csrf-token/', get_csrf_token),
+    # path('api/', include('scheduler.api_urls')),
+    path('members/', include('members.api_urls')),
+    path('csrf-token/', get_csrf_token),
 ]

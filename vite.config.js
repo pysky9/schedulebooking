@@ -17,6 +17,16 @@ export default defineConfig({
         target: 'http://localhost:8000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
+      },
+      // 將 members 路徑代理到 Django 後端
+      '/members': {
+        target: 'http://localhost:8000',
+        changeOrigin: true
+      },
+      // 將 csrf-token 路徑代理到 Django 後端
+      '/csrf-token': {
+        target: 'http://localhost:8000',
+        changeOrigin: true
       }
     }
   }

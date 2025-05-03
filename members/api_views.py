@@ -54,9 +54,9 @@ def login_api(request):
                     "message": "登錄成功",
                     "user": {
                         "id": member.id,
-                        "name": member.name,
+                        "username": member.username,
                         "email": member.email,
-                        "role": member.role
+                        "url": member.url
                     }
                 })
                 
@@ -97,13 +97,15 @@ def register_api(request):
         data = json.loads(request.body)
         
         # 獲取請求數據
-        name = data.get("name")
+        username = data.get("username")  # 前端和後端都使用 username
         email = data.get("email")
         password = data.get("password")
-        role = data.get("role")
+        
+        # 生成 URL（可以是用戶名或電子郵件的一部分）
+        url = f"/scheduler/views/{data['username']}"
         
         # 驗證數據
-        if not all([name, email, password, role]):
+        if not all([username, email, password]):
             return JsonResponse({
                 "success": False,
                 "message": "缺少必要參數"
@@ -119,10 +121,10 @@ def register_api(request):
         # 創建用戶
         with transaction.atomic():
             member = Members.objects.create(
-                name=name,
+                username=username,
                 email=email,
                 password=make_password(password),
-                role=role
+                url=url
             )
             
             # 創建 JWT
@@ -140,9 +142,9 @@ def register_api(request):
                 "message": "註冊成功",
                 "user": {
                     "id": member.id,
-                    "name": member.name,
+                    "username": member.username,
                     "email": member.email,
-                    "role": member.role
+                    "url": member.url
                 }
             })
             
@@ -213,9 +215,9 @@ def profile_api(request):
                 "success": True,
                 "user": {
                     "id": member.id,
-                    "name": member.name,
+                    "username": member.username,
                     "email": member.email,
-                    "role": member.role
+                    "url": member.url
                 }
             })
         
@@ -265,10 +267,10 @@ def update_profile_api(request):
             
             # 獲取請求數據
             data = json.loads(request.body)
-            name = data.get("name")
+            username = data.get("username")  # 前端和後端都使用 username
             
             # 驗證數據
-            if not name:
+            if not username:
                 return JsonResponse({
                     "success": False,
                     "message": "缺少必要參數"
@@ -277,7 +279,7 @@ def update_profile_api(request):
             # 更新用戶資料
             with transaction.atomic():
                 member = Members.objects.get(id=user_id)
-                member.name = name
+                member.username = username
                 member.save()
                 
                 return JsonResponse({
@@ -285,9 +287,9 @@ def update_profile_api(request):
                     "message": "資料已更新",
                     "user": {
                         "id": member.id,
-                        "name": member.name,
+                        "username": member.username,
                         "email": member.email,
-                        "role": member.role
+                        "url": member.url
                     }
                 })
         
@@ -420,9 +422,9 @@ def check_auth_api(request):
                 "authenticated": True,
                 "user": {
                     "id": member.id,
-                    "name": member.name,
+                    "name": member.username,  # 返回前端期望的 name 欄位
                     "email": member.email,
-                    "role": member.role
+                    "url": member.url
                 }
             })
         

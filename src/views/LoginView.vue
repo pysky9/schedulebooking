@@ -22,6 +22,7 @@ import { useRouter } from 'vue-router';
 import LoginHeader from '@/components/LoginHeader.vue';
 import AuthForm from '@/components/AuthForm.vue';
 import LoginFooter from '@/components/LoginFooter.vue';
+import { login, register } from '@/api/auth';
 
 export default {
   name: 'LoginView',
@@ -62,41 +63,77 @@ export default {
       successMessage.value = '';
     };
     
-    const handleLogin = () => {
+    const handleLogin = async () => {
       if (!loginForm.email || !loginForm.password) {
         errorMessage.value = '請填寫所有欄位';
         return;
       }
       
       isLoading.value = true;
+      errorMessage.value = '';
       
-      // 模擬 API 請求
-      setTimeout(() => {
-        console.log('登入', loginForm);
-        isLoading.value = false;
+      try {
+        // 調用實際的登入 API
+        const response = await login({
+          email: loginForm.email,
+          password: loginForm.password
+        });
         
-        // 假設登入成功，導航到網站地圖頁面
-        router.push('/sitemap');
-      }, 1500);
+        console.log('登入響應:', response);
+        
+        if (response.success) {
+          // 登入成功，導航到網站地圖頁面
+          router.push('/sitemap');
+        } else {
+          // 登入失敗，顯示錯誤訊息
+          errorMessage.value = response.message || '登入失敗';
+        }
+      } catch (error) {
+        console.error('登入錯誤:', error);
+        errorMessage.value = error.response?.data?.message || '登入失敗，請稍後再試';
+      } finally {
+        isLoading.value = false;
+      }
     };
     
-    const handleSignup = () => {
+    const handleSignup = async () => {
       if (!signupForm.username || !signupForm.email || !signupForm.password) {
         errorMessage.value = '請填寫所有欄位';
         return;
       }
       
       isLoading.value = true;
+      errorMessage.value = '';
       
-      // 模擬 API 請求
-      setTimeout(() => {
-        console.log('註冊', signupForm);
-        isLoading.value = false;
+      try {
+        // 調用實際的註冊 API
+        const response = await register({
+          username: signupForm.username,
+          email: signupForm.email,
+          password: signupForm.password
+        });
         
-        // 假設註冊成功，顯示成功訊息並切換到登入
-        successMessage.value = '註冊成功！請登入';
-        isLogin.value = true;
-      }, 1500);
+        console.log('註冊響應:', response);
+        
+        if (response.success) {
+          // 註冊成功，顯示成功訊息並切換到登入
+          successMessage.value = '註冊成功！請登入';
+          isLogin.value = true;
+          
+          // 清空表單
+          signupForm.username = '';
+          signupForm.email = '';
+          signupForm.password = '';
+        } else {
+          // 註冊失敗，顯示錯誤訊息
+          errorMessage.value = response.message || '註冊失敗';
+        }
+      } catch (error) {
+        console.error('註冊錯誤:', error);
+        errorMessage.value = error.response?.data?.message || '註冊失敗，請稍後再試';
+      } finally {
+        isLoading.value = false;
+      }
     };
     
     const submitForm = () => {
